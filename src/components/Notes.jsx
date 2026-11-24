@@ -32,6 +32,14 @@ function Notes() {
     localStorage.setItem('notes', JSON.stringify(notes))
   }, [notes])
 
+  useEffect(() => {
+    const id = setTimeout(() => {
+      localStorage.setItem('draft', JSON.stringify(form))
+    }, 1000)
+
+    return () => clearTimeout(id)
+  }, [form])
+
   function handleChange(event) {
     const { name, value } = event.target
 
@@ -83,7 +91,9 @@ function Notes() {
         </h1>
 
         <div>
-          <p className="mb-2 text-[13px] font-normal tracking-wide text-[#949494]">SEARCH</p>
+          <p className="mb-2 text-[13px] font-normal tracking-wide text-[#949494]">
+            SEARCH
+          </p>
           <input
             placeholder="Search by title"
             value={search}
@@ -93,7 +103,9 @@ function Notes() {
         </div>
 
         <form className="grid gap-3" onSubmit={handleSubmit}>
-          <p className="text-[13px] font-normal tracking-wide text-[#949494]">NEW NOTE</p>
+          <p className="text-[13px] font-normal tracking-wide text-[#949494]">
+            NEW NOTE
+          </p>
           <input
             name="title"
             placeholder="Title"
